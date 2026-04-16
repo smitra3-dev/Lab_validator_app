@@ -46,4 +46,20 @@
   <component name="UnknownFeatures">
     <option featureType="dependencySupport" implementationName="python:kafka-python" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/validation/Gm_Gds_validation/Gm_check/gm_frequency_check/gm_hf_frequency_check.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/validation/Gm_Gds_validation/Gds_check/gds_sign_check.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>
