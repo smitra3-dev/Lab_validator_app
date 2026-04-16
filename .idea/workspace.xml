@@ -59,6 +59,11 @@
           <line>1</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/validation/Gm_Gds_validation/Gds_check/gds_vgs_check/gds_vgs_monotonicity_check.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
