@@ -5,27 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92a6af34-e689-4b88-b656-2a420aae2c7c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/00_theme_tokens.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/01_dashboard_base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/02_tabs.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/03_controls.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/04_panels.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/05_validation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/06_buttons.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/07_graphs.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/08_responsive.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/cards.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/control_bar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/debug_panel.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/dropdown.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/page_layout.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/plot_panel.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tabs.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/theme_tokens.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/toggle_checklist.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/validation_panel.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +29,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/GFApps/Project_ATLAS"
+    "last_opened_file_path": "C:/Users/pchowdh1/OneDrive - GlobalFoundries/Desktop/Reusable block chain/validation"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
