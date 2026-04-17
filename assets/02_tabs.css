@@ -1,0 +1,54 @@
+/* =========================================================
+   FILE: 02_tabs.css
+   PURPOSE: Top navigation tabs
+   ========================================================= */
+
+.custom-tabs-container {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+.custom-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.custom-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    padding: 12px 20px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.2s ease,
+        box-shadow 0.25s ease;
+    box-sizing: border-box;
+}
+
+.custom-tab:hover {
+    background: var(--color-hover-bg);
+    border-color: #b8c4d6;
+    transform: translateY(-1px);
+}
+
+.custom-tab--selected {
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+}

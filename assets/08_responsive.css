@@ -1,0 +1,40 @@
+/* =========================================================
+   FILE: 08_responsive.css
+   PURPOSE: Responsive layout rules
+   ========================================================= */
+
+@media screen and (max-width: 1200px) {
+    .main-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .side-stack {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard-page {
+        padding: 10px;
+    }
+
+    .custom-tabs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .custom-tab {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .control-strip {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-group {
+        width: 100%;
+        min-width: unset;
+    }
+}

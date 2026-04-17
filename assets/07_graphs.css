@@ -1,0 +1,17 @@
+/* =========================================================
+   FILE: 07_graphs.css
+   PURPOSE: Plotly graph container behavior
+   ========================================================= */
+
+.graph-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+}
+
+.js-plotly-plot,
+.plotly-graph-div {
+    width: 100% !important;
+}
+

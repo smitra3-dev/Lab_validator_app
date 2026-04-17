@@ -1,0 +1,55 @@
+/* =========================================================
+   FILE: 00_theme_tokens.css
+   PURPOSE: Global design tokens
+   ========================================================= */
+
+:root {
+    --color-page-bg: #f7f9fc;
+    --color-surface: #ffffff;
+    --color-border: #d9dee7;
+    --color-border-soft: #dde3ec;
+
+    --color-text: #2c3e50;
+    --color-text-muted: #6b7280;
+
+    --color-primary: #0b57d0;
+    --color-primary-soft: #eaf2ff;
+
+    --color-hover-bg: #f4f7fb;
+
+    --color-success: #22c55e;
+    --color-success-bg: #f0fdf4;
+
+    --color-danger: #ef4444;
+    --color-danger-bg: #fef2f2;
+
+    --color-warning: #f59e0b;
+    --color-warning-bg: #fffaf0;
+
+    --color-info: #3b82f6;
+    --color-info-bg: #eff6ff;
+
+    --color-neutral: #111827;
+    --color-neutral-bg: #f3f4f6;
+
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(11, 87, 208, 0.14);
+
+    --radius-sm: 10px;
+    --radius-md: 12px;
+    --radius-lg: 14px;
+    --radius-xl: 16px;
+    --radius-pill: 999px;
+
+    --space-xs: 6px;
+    --space-sm: 10px;
+    --space-md: 14px;
+    --space-lg: 16px;
+    --space-xl: 18px;
+
+    --font-family-base: "Segoe UI", Arial, sans-serif;
+    --font-size-sm: 13px;
+    --font-size-md: 14px;
+    --font-size-lg: 15px;
+    --font-size-xl: 16px;
+}

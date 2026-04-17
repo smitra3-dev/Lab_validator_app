@@ -1,0 +1,56 @@
+/* =========================================================
+   FILE: 05_validation.css
+   PURPOSE: Validation result box and result states
+   ========================================================= */
+
+.validation-box {
+    width: 100%;
+    min-height: 130px;
+    max-height: 320px;
+    overflow-y: auto;
+    background: #fbfcfe;
+    border: 1px solid #d9e2ef;
+    border-radius: var(--radius-md);
+    padding: 12px;
+    font-size: var(--font-size-md);
+    line-height: 1.5;
+    color: #233142;
+    white-space: normal;
+    word-break: break-word;
+    box-sizing: border-box;
+}
+
+.status-pass {
+    border-left: 5px solid var(--color-success);
+    background: var(--color-success-bg);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+}
+
+.status-fail {
+    border-left: 5px solid var(--color-danger);
+    background: var(--color-danger-bg);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+}
+
+.status-check {
+    border-left: 5px solid var(--color-warning);
+    background: var(--color-warning-bg);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+}
+
+.status-info {
+    border-left: 5px solid var(--color-info);
+    background: var(--color-info-bg);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+}
+
+.status-null {
+    border-left: 5px solid var(--color-neutral);
+    background: var(--color-neutral-bg);
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+}

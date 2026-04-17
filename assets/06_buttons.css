@@ -1,0 +1,32 @@
+/* =========================================================
+   FILE: 06_buttons.css
+   PURPOSE: Action buttons
+   ========================================================= */
+
+.action-button {
+    height: 42px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 25px;
+    background: var(--color-primary);
+    color: #ffffff;
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.action-button:hover {
+    background: #0948ad;
+    transform: translateY(-1px);
+}
+
+.action-button.secondary {
+    background: #eef2f7;
+    color: #243447;
+}
+
+.action-button.secondary:hover {
+    background: #dde6f1;
+}
+

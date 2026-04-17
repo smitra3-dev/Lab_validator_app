@@ -1,0 +1,40 @@
+/* =========================================================
+   FILE: 01_dashboard_base.css
+   PURPOSE: Dashboard page wrappers and base layout
+   ========================================================= */
+
+.dashboard-page {
+    background: var(--color-page-bg);
+    min-height: 100vh;
+    padding: var(--space-xl);
+    font-family: var(--font-family-base);
+    box-sizing: border-box;
+}
+
+.dashboard-shell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.tab-content-panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-sm);
+    box-sizing: border-box;
+}
+
+.main-content-grid {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+}
+
+.side-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
