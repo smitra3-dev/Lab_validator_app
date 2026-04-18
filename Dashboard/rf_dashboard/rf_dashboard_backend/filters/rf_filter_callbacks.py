@@ -1,5 +1,3 @@
-##filters/rf_filter_callbacks.py
-
 from dash.dependencies import Input, Output
 import polars as pl
 
@@ -16,10 +14,11 @@ def register_rf_filter_callbacks(app, df):
     )
     def update_rf_device_options(macro, current_device):
         macro = to_list(macro)
-        if not macro:
-            return [], []
 
-        filtered = df.filter(pl.col("macro").is_in(macro))
+        filtered = df
+        if macro:
+            filtered = filtered.filter(pl.col("macro").is_in(macro))
+
         values = collect_unique(filtered, "device")
         return make_options(values), keep_valid(current_device, values)
 
@@ -34,10 +33,9 @@ def register_rf_filter_callbacks(app, df):
         macro = to_list(macro)
         device = to_list(device)
 
-        if not macro:
-            return [], []
-
-        filtered = df.filter(pl.col("macro").is_in(macro))
+        filtered = df
+        if macro:
+            filtered = filtered.filter(pl.col("macro").is_in(macro))
         if device:
             filtered = filtered.filter(pl.col("device").is_in(device))
 
@@ -57,10 +55,9 @@ def register_rf_filter_callbacks(app, df):
         device = to_list(device)
         siteX = to_list(siteX)
 
-        if not macro:
-            return [], []
-
-        filtered = df.filter(pl.col("macro").is_in(macro))
+        filtered = df
+        if macro:
+            filtered = filtered.filter(pl.col("macro").is_in(macro))
         if device:
             filtered = filtered.filter(pl.col("device").is_in(device))
         if siteX:
@@ -84,10 +81,9 @@ def register_rf_filter_callbacks(app, df):
         siteX = to_list(siteX)
         siteY = to_list(siteY)
 
-        if not macro:
-            return [], []
-
-        filtered = df.filter(pl.col("macro").is_in(macro))
+        filtered = df
+        if macro:
+            filtered = filtered.filter(pl.col("macro").is_in(macro))
         if device:
             filtered = filtered.filter(pl.col("device").is_in(device))
         if siteX:
@@ -115,10 +111,9 @@ def register_rf_filter_callbacks(app, df):
         siteY = to_list(siteY)
         vd = to_list(vd)
 
-        if not macro:
-            return [], []
-
-        filtered = df.filter(pl.col("macro").is_in(macro))
+        filtered = df
+        if macro:
+            filtered = filtered.filter(pl.col("macro").is_in(macro))
         if device:
             filtered = filtered.filter(pl.col("device").is_in(device))
         if siteX:
@@ -130,4 +125,3 @@ def register_rf_filter_callbacks(app, df):
 
         values = collect_unique(filtered, "Vg")
         return make_options(values), keep_valid(current_vg, values)
-

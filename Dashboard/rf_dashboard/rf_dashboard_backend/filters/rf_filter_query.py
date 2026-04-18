@@ -1,18 +1,15 @@
-##filters/rf_filter_query.py
-
 import polars as pl
 
 from .filter_utils import to_list
 
 
 def collect_unique(df, col_name):
-    pdf = (
-        df.select(col_name)
-        .drop_nulls()
-        .unique()
-        .collect()
-        .to_pandas()
-    )
+    query = df.select(col_name).drop_nulls().unique()
+
+    if isinstance(query, pl.LazyFrame):
+        pdf = query.collect().to_pandas()
+    else:
+        pdf = query.to_pandas()
 
     if pdf.empty:
         return []

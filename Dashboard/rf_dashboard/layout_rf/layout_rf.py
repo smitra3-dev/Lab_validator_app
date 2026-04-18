@@ -1,4 +1,3 @@
-##RF
 from dash import html, dcc
 
 
@@ -12,18 +11,30 @@ def _control_group(label, component):
     )
 
 
+def _safe_sorted_unique(meta, col_name):
+    if col_name not in meta.columns:
+        return []
+    values = meta[col_name].drop_nulls().unique().to_list()
+    return sorted(values, key=lambda x: str(x))
+
+
 def create_layout(meta, rf_params):
+    macro_values = _safe_sorted_unique(meta, "macro")
+    device_values = _safe_sorted_unique(meta, "device")
+    sitex_values = _safe_sorted_unique(meta, "siteX")
+    sitey_values = _safe_sorted_unique(meta, "siteY")
+    vd_values = _safe_sorted_unique(meta, "Vd")
+    vg_values = _safe_sorted_unique(meta, "Vg")
+
     return html.Div(
         className="dashboard-page",
         children=[
             html.Div(
                 className="dashboard-shell",
                 children=[
-
                     html.Div(
                         className="tab-content-panel",
                         children=[
-
                             html.Div(
                                 className="panel-title",
                                 children="Plot against Frequency"
@@ -32,59 +43,75 @@ def create_layout(meta, rf_params):
                             html.Div(
                                 className="control-strip",
                                 children=[
-
                                     _control_group(
                                         "Macro",
                                         dcc.Dropdown(
-                                            sorted(meta["macro"].drop_nulls().unique().to_list()),
+                                            options=[{"label": str(v), "value": v} for v in macro_values],
+                                            value=[macro_values[0]] if macro_values else [],
                                             id="rf-macro",
                                             multi=True,
-                                            placeholder="Macro"
+                                            placeholder="Macro",
+                                            clearable=True
                                         )
                                     ),
 
                                     _control_group(
                                         "Device",
                                         dcc.Dropdown(
+                                            options=[{"label": str(v), "value": v} for v in device_values],
+                                            value=[],
                                             id="rf-device",
                                             multi=True,
-                                            placeholder="Device"
+                                            placeholder="Device",
+                                            clearable=True
                                         )
                                     ),
 
                                     _control_group(
                                         "SiteX",
                                         dcc.Dropdown(
+                                            options=[{"label": str(v), "value": v} for v in sitex_values],
+                                            value=[],
                                             id="rf-siteX",
                                             multi=True,
-                                            placeholder="SiteX"
+                                            placeholder="SiteX",
+                                            clearable=True
                                         )
                                     ),
 
                                     _control_group(
                                         "SiteY",
                                         dcc.Dropdown(
+                                            options=[{"label": str(v), "value": v} for v in sitey_values],
+                                            value=[],
                                             id="rf-siteY",
                                             multi=True,
-                                            placeholder="SiteY"
+                                            placeholder="SiteY",
+                                            clearable=True
                                         )
                                     ),
 
                                     _control_group(
                                         "Vd",
                                         dcc.Dropdown(
+                                            options=[{"label": str(v), "value": v} for v in vd_values],
+                                            value=[],
                                             id="rf-Vd",
                                             multi=True,
-                                            placeholder="Vd"
+                                            placeholder="Vd",
+                                            clearable=True
                                         )
                                     ),
 
                                     _control_group(
                                         "Vg",
                                         dcc.Dropdown(
+                                            options=[{"label": str(v), "value": v} for v in vg_values],
+                                            value=[],
                                             id="rf-Vg",
                                             multi=True,
-                                            placeholder="Vg"
+                                            placeholder="Vg",
+                                            clearable=True
                                         )
                                     ),
 
@@ -94,7 +121,8 @@ def create_layout(meta, rf_params):
                                             options=[{"label": p, "value": p} for p in rf_params],
                                             value=["S21_dB"],
                                             multi=True,
-                                            id="rf-parameter"
+                                            id="rf-parameter",
+                                            clearable=True
                                         )
                                     ),
 
@@ -138,7 +166,6 @@ def create_layout(meta, rf_params):
                             html.Div(
                                 className="main-content-grid",
                                 children=[
-
                                     html.Div(
                                         className="plot-panel",
                                         children=[
@@ -181,7 +208,6 @@ def create_layout(meta, rf_params):
                                     html.Div(
                                         className="side-stack",
                                         children=[
-
                                             html.Div(
                                                 className="validation-panel",
                                                 children=[
@@ -191,7 +217,8 @@ def create_layout(meta, rf_params):
                                                     ),
                                                     html.Div(
                                                         id="rf-validation_output",
-                                                        className="validation-box"
+                                                        className="validation-box",
+                                                        children="No validation results yet"
                                                     )
                                                 ]
                                             ),
@@ -205,7 +232,8 @@ def create_layout(meta, rf_params):
                                                     ),
                                                     html.Div(
                                                         id="rf-sparam_output",
-                                                        className="validation-box"
+                                                        className="validation-box",
+                                                        children="No S-parameter validation yet"
                                                     )
                                                 ]
                                             ),
@@ -219,7 +247,8 @@ def create_layout(meta, rf_params):
                                                     ),
                                                     html.Div(
                                                         id="rf-h21_output",
-                                                        className="validation-box"
+                                                        className="validation-box",
+                                                        children="No h21 validation yet"
                                                     )
                                                 ]
                                             ),
@@ -233,7 +262,8 @@ def create_layout(meta, rf_params):
                                                     ),
                                                     html.Div(
                                                         id="rf-cap_output",
-                                                        className="validation-box"
+                                                        className="validation-box",
+                                                        children="No capacitance validation yet"
                                                     )
                                                 ]
                                             ),
@@ -247,7 +277,8 @@ def create_layout(meta, rf_params):
                                                     ),
                                                     html.Div(
                                                         id="rf-ftfmax_output",
-                                                        className="validation-box"
+                                                        className="validation-box",
+                                                        children="No Ft/Fmax validation yet"
                                                     )
                                                 ]
                                             ),
