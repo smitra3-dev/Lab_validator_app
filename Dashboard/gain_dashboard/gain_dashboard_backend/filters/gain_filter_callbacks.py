@@ -1,71 +1,112 @@
 #dashboard/gain/filters/gain_filter_callbacks.py
 
 import polars as pl
-from dash.dependencies import Input, Output
+from dash import Input, Output
+
+
+def _to_list(value):
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return [v for v in value if v is not None and v != ""]
+    return [value]
+
+
+def _make_options(values):
+    return [{"label": str(v), "value": v} for v in values]
+
+
+def _keep_valid(selected, valid_values):
+    selected_list = _to_list(selected)
+    valid_set = set(valid_values)
+    return [v for v in selected_list if v in valid_set]
+
+
+def _collect_unique(filtered, col_name):
+    query = filtered.select(col_name).drop_nulls().unique()
+    series = query.collect()[col_name] if isinstance(query, pl.LazyFrame) else query[col_name]
+    values = [v for v in series.to_list() if v is not None]
+    return sorted(values, key=lambda x: str(x))
 
 
 def register_gain_filter_callbacks(app, df):
     @app.callback(
         Output("gain-device", "options"),
+        Output("gain-device", "value"),
         Input("gain-macro", "value"),
+        Input("gain-device", "value"),
     )
-    def update_gain_device(macro):
+    def update_gain_device_options(macro, current_device):
+        macro = _to_list(macro)
         if not macro:
-            return []
+            return [], []
 
         filtered = df.filter(pl.col("macro").is_in(macro))
-        pdf = filtered.select(["macro", "device"]).unique().collect().to_pandas()
-
-        result = []
-        for m in macro:
-            devs = pdf[pdf["macro"] == m]["device"].dropna().unique()
-            for d in devs:
-                result.append({"label": f"{m} | {d}", "value": d})
-        return result
+        values = _collect_unique(filtered, "device")
+        return _make_options(values), _keep_valid(current_device, values)
 
     @app.callback(
         Output("gain-siteX", "options"),
+        Output("gain-siteX", "value"),
         Input("gain-macro", "value"),
+        Input("gain-device", "value"),
+        Input("gain-siteX", "value"),
     )
-    def update_gain_siteX(macro):
+    def update_gain_sitex_options(macro, device, current_sitex):
+        macro = _to_list(macro)
+        device = _to_list(device)
         if not macro:
-            return []
+            return [], []
 
-        values = (
-            df.filter(pl.col("macro").is_in(macro))
-            .select("siteX").unique().collect()["siteX"].to_list()
-        )
-        values = [v for v in values if v is not None]
-        return [{"label": str(v), "value": v} for v in sorted(values)]
+        filtered = df.filter(pl.col("macro").is_in(macro))
+        if device:
+            filtered = filtered.filter(pl.col("device").is_in(device))
+
+        values = _collect_unique(filtered, "siteX")
+        return _make_options(values), _keep_valid(current_sitex, values)
 
     @app.callback(
         Output("gain-siteY", "options"),
-        Input("gain-macro", "value"),
-        Input("gain-siteX", "value"),
-    )
-    def update_gain_siteY(macro, siteX):
-        if not macro:
-            return []
-
-        filtered = df.filter(pl.col("macro").is_in(macro))
-        if siteX:
-            filtered = filtered.filter(pl.col("siteX").is_in(siteX))
-
-        values = filtered.select("siteY").unique().collect()["siteY"].to_list()
-        values = [v for v in values if v is not None]
-        return [{"label": str(v), "value": v} for v in sorted(values)]
-
-    @app.callback(
-        Output("gain-vd_select", "options"),
+        Output("gain-siteY", "value"),
         Input("gain-macro", "value"),
         Input("gain-device", "value"),
         Input("gain-siteX", "value"),
         Input("gain-siteY", "value"),
     )
-    def update_gain_vd(macro, device, siteX, siteY):
-        filtered = df
-        if macro:
-            filtered = filtered.filter(pl.col("macro").is_in(macro))
+    def update_gain_sitey_options(macro, device, siteX, current_sitey):
+        macro = _to_list(macro)
+        device = _to_list(device)
+        siteX = _to_list(siteX)
+        if not macro:
+            return [], []
+
+        filtered = df.filter(pl.col("macro").is_in(macro))
+        if device:
+            filtered = filtered.filter(pl.col("device").is_in(device))
+        if siteX:
+            filtered = filtered.filter(pl.col("siteX").is_in(siteX))
+
+        values = _collect_unique(filtered, "siteY")
+        return _make_options(values), _keep_valid(current_sitey, values)
+
+    @app.callback(
+        Output("gain-vd_select", "options"),
+        Output("gain-vd_select", "value"),
+        Input("gain-macro", "value"),
+        Input("gain-device", "value"),
+        Input("gain-siteX", "value"),
+        Input("gain-siteY", "value"),
+        Input("gain-vd_select", "value"),
+    )
+    def update_gain_vd_options(macro, device, siteX, siteY, current_vd):
+        macro = _to_list(macro)
+        device = _to_list(device)
+        siteX = _to_list(siteX)
+        siteY = _to_list(siteY)
+        if not macro:
+            return [], []
+
+        filtered = df.filter(pl.col("macro").is_in(macro))
         if device:
             filtered = filtered.filter(pl.col("device").is_in(device))
         if siteX:
@@ -73,9 +114,8 @@ def register_gain_filter_callbacks(app, df):
         if siteY:
             filtered = filtered.filter(pl.col("siteY").is_in(siteY))
 
-        values = filtered.select("Vd").unique().sort("Vd").collect()["Vd"].to_list()
-        values = [v for v in values if v is not None]
-        return [{"label": str(v), "value": v} for v in values]
+        values = _collect_unique(filtered, "Vd")
+        return _make_options(values), _keep_valid(current_vd, values)
 
     @app.callback(
         Output("gain-parameter", "options"),
@@ -87,6 +127,12 @@ def register_gain_filter_callbacks(app, df):
         Input("gain-vd_select", "value"),
     )
     def update_gain_parameters(macro, device, siteX, siteY, vd):
+        macro = _to_list(macro)
+        device = _to_list(device)
+        siteX = _to_list(siteX)
+        siteY = _to_list(siteY)
+        vd = _to_list(vd)
+
         filtered = df
         if macro:
             filtered = filtered.filter(pl.col("macro").is_in(macro))

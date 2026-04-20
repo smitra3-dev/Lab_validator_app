@@ -1,4 +1,3 @@
-##validation/rf_validation_runner.py
 from .rf_validation_sections import (
     build_generic_validation_children,
     build_sparam_validation_children,
